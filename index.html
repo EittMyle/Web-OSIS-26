@@ -1,0 +1,1077 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSIS Kabinet Aksara | Portal Resmi Siswa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        pearl: '#FAFAFA',
+                        ivory: '#FEFCE8',
+                    },
+                    animation: {
+                        'blob': 'blob 12s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -40px) scale(1.08)' },
+                            '66%': { transform: 'translate(-25px, 25px) scale(0.95)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Theme - Bright Pearl White */
+        body {
+            background-color: #FAFAFA;
+            color: #0F172A;
+            overflow-x: hidden;
+        }
+
+        /* Apple-Inspired Liquid Glass Card (Light Mode) */
+        .liquid-card {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.78) 0%,
+                rgba(255, 255, 255, 0.55) 55%,
+                rgba(254, 249, 195, 0.45) 100%
+            );
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(245, 158, 11, 0.18);
+            border-top-color: rgba(255, 255, 255, 0.95);
+            border-left-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 
+                0 16px 36px -10px rgba(15, 23, 42, 0.08),
+                0 4px 14px -2px rgba(245, 158, 11, 0.07),
+                inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), 
+                        border-color 0.35s ease, 
+                        box-shadow 0.35s ease;
+        }
+
+        .liquid-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(245, 158, 11, 0.42);
+            border-top-color: rgba(255, 255, 255, 1);
+            box-shadow: 
+                0 24px 48px -12px rgba(15, 23, 42, 0.12),
+                0 8px 24px -4px rgba(245, 158, 11, 0.16),
+                inset 0 2px 2px rgba(255, 255, 255, 1);
+        }
+
+        /* Apple-Inspired Primary Liquid Glass Button (Solar Yellow / Amber Tint) */
+        .btn-liquid-primary {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                rgba(250, 204, 21, 0.82) 0%,
+                rgba(245, 158, 11, 0.88) 55%,
+                rgba(234, 179, 8, 0.82) 100%
+            );
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
+            border: 1px solid rgba(217, 119, 6, 0.35);
+            border-top-color: rgba(255, 255, 255, 0.92);
+            border-left-color: rgba(255, 255, 255, 0.72);
+            color: #0F172A;
+            box-shadow: 
+                0 10px 25px -5px rgba(245, 158, 11, 0.4),
+                0 4px 10px rgba(15, 23, 42, 0.06),
+                inset 0 2px 1.5px rgba(255, 255, 255, 0.88),
+                inset 0 -3px 8px rgba(180, 83, 9, 0.25);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Specular Glint Sweep on Hover */
+        .btn-liquid-primary::before,
+        .btn-liquid-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.65),
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .btn-liquid-primary:hover::before,
+        .btn-liquid-glass:hover::before {
+            left: 140%;
+        }
+
+        .btn-liquid-primary:hover {
+            transform: translateY(-2px) scale(1.015);
+            background: linear-gradient(
+                135deg,
+                rgba(253, 224, 71, 0.92) 0%,
+                rgba(245, 158, 11, 0.95) 55%,
+                rgba(234, 179, 8, 0.9) 100%
+            );
+            border-top-color: #FFFFFF;
+            box-shadow: 
+                0 16px 32px -4px rgba(245, 158, 11, 0.5),
+                0 6px 14px rgba(15, 23, 42, 0.08),
+                inset 0 2px 2px rgba(255, 255, 255, 0.95),
+                inset 0 -3px 10px rgba(180, 83, 9, 0.3);
+        }
+
+        .btn-liquid-primary:active,
+        .btn-liquid-glass:active {
+            transform: translateY(1px) scale(0.975);
+        }
+
+        /* Secondary Frosted White Liquid Glass Button */
+        .btn-liquid-glass {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.85) 0%,
+                rgba(255, 255, 255, 0.55) 100%
+            );
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(15, 23, 42, 0.09);
+            border-top-color: rgba(255, 255, 255, 1);
+            border-left-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 
+                0 8px 20px -4px rgba(15, 23, 42, 0.07),
+                inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95),
+                inset 0 -2px 5px rgba(245, 158, 11, 0.08);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .btn-liquid-glass:hover {
+            transform: translateY(-2px) scale(1.015);
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.96) 0%,
+                rgba(254, 249, 195, 0.7) 100%
+            );
+            border-color: rgba(245, 158, 11, 0.38);
+            border-top-color: #FFFFFF;
+            box-shadow: 
+                0 12px 26px -4px rgba(15, 23, 42, 0.1),
+                0 0 18px rgba(250, 204, 21, 0.28),
+                inset 0 2px 2px rgba(255, 255, 255, 1);
+        }
+
+        /* Active Filter Pill */
+        .filter-pill.active {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.85), rgba(245, 158, 11, 0.9));
+            border-color: rgba(217, 119, 6, 0.4);
+            border-top-color: rgba(255, 255, 255, 0.95);
+            color: #0F172A;
+            box-shadow: 0 8px 20px -3px rgba(245, 158, 11, 0.38), inset 0 1.5px 1px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Floating Glass Dock Navbar */
+        .glass-dock {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid rgba(245, 158, 11, 0.18);
+            border-top-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.08), inset 0 1.5px 0 rgba(255, 255, 255, 0.95);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.35);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.6);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-300/50 selection:text-slate-900">
+
+    <!-- Ambient Liquid Background Orbs (Warm Solar Yellow, Gold & Ivory Mesh on White) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div class="absolute -top-32 -left-24 w-[30rem] h-[30rem] bg-amber-300/35 rounded-full blur-[120px] animate-blob"></div>
+        <div class="absolute top-1/4 -right-28 w-[34rem] h-[34rem] bg-yellow-300/30 rounded-full blur-[130px] animate-blob" style="animation-delay: 3s;"></div>
+        <div class="absolute -bottom-32 left-1/4 w-[32rem] h-[32rem] bg-orange-200/35 rounded-full blur-[130px] animate-blob" style="animation-delay: 6s;"></div>
+        <!-- Subtle Warm Grid Overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_25%,#000_60%,transparent_100%)]"></div>
+    </div>
+
+    <!-- Floating Glass Navigation Bar -->
+    <header class="fixed top-4 inset-x-0 z-40 px-4 sm:px-6">
+        <nav class="max-w-6xl mx-auto glass-dock rounded-full px-4 sm:px-6 py-3 flex items-center justify-between">
+            <!-- Brand -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 p-[1.5px] shadow-md shadow-amber-500/25">
+                    <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+                        <i data-lucide="sun" class="w-4 h-4 text-amber-500 group-hover:rotate-45 transition-transform duration-300"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 block leading-none">OSIS SURYA</span>
+                    <span class="text-[10px] text-amber-700 font-semibold tracking-widest uppercase">Periode 2026/2027</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600">
+                <a href="#visi-misi" class="px-4 py-2 rounded-full hover:text-slate-950 hover:bg-amber-400/15 transition-colors">Visi & Misi</a>
+                <a href="#agenda" class="px-4 py-2 rounded-full hover:text-slate-950 hover:bg-amber-400/15 transition-colors">Agenda & Lomba</a>
+                <a href="#galeri" class="px-4 py-2 rounded-full hover:text-slate-950 hover:bg-amber-400/15 transition-colors">Dokumentasi</a>
+                <a href="#pengurus" class="px-4 py-2 rounded-full hover:text-slate-950 hover:bg-amber-400/15 transition-colors">Struktur</a>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2">
+                <button onclick="openAspirationModal()" class="btn-liquid-primary px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="message-square-plus" class="w-4 h-4 text-slate-900"></i>
+                    <span>Kotak Aspirasi</span>
+                </button>
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" class="md:hidden btn-liquid-glass p-2.5 rounded-full text-slate-700">
+                    <i data-lucide="menu" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Dropdown Glass Menu -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-6xl mx-auto mt-2 glass-dock rounded-3xl p-4 flex flex-col gap-1 text-sm font-medium text-slate-800">
+            <a href="#visi-misi" onclick="toggleMobileMenu()" class="px-4 py-3 rounded-2xl hover:bg-amber-400/15 flex items-center justify-between">
+                <span>Visi & Misi Kabinet</span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-amber-600"></i>
+            </a>
+            <a href="#agenda" onclick="toggleMobileMenu()" class="px-4 py-3 rounded-2xl hover:bg-amber-400/15 flex items-center justify-between">
+                <span>Agenda & Event</span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-amber-600"></i>
+            </a>
+            <a href="#galeri" onclick="toggleMobileMenu()" class="px-4 py-3 rounded-2xl hover:bg-amber-400/15 flex items-center justify-between">
+                <span>Dokumentasi Kegiatan</span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-amber-600"></i>
+            </a>
+            <a href="#pengurus" onclick="toggleMobileMenu()" class="px-4 py-3 rounded-2xl hover:bg-amber-400/15 flex items-center justify-between">
+                <span>Struktur Inti</span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-amber-600"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10">
+
+        <!-- HERO SECTION -->
+        <section class="pt-36 pb-20 sm:pt-44 sm:pb-28 px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+                    <!-- Left Copy -->
+                    <div class="lg:col-span-7 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-card mb-6">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                            <span class="text-xs font-semibold text-amber-900 tracking-wide">Portal Digital Resmi OSIS SMA Nusantara</span>
+                        </div>
+
+                        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 leading-[1.12] mb-6">
+                            Ruang Kolaborasi, <br class="hidden sm:block">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500">
+                                Inovasi & Aksi Nyata.
+                            </span>
+                        </h1>
+
+                        <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
+                            Selamat datang di pusat informasi <strong class="text-slate-900">Kabinet Surya</strong>. Pantau jadwal acara sekolah, akses dokumentasi kegiatan terbaru, dan sampaikan aspirasimu secara transparan dalam satu platform.
+                        </p>
+
+                        <!-- Liquid Glass CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#agenda" class="w-full sm:w-auto btn-liquid-primary px-7 py-3.5 rounded-full font-bold text-sm sm:text-base text-slate-900 flex items-center justify-center gap-2.5">
+                                <i data-lucide="calendar-days" class="w-5 h-5 text-slate-900"></i>
+                                <span>Lihat Agenda Terdekat</span>
+                            </a>
+                            <a href="#galeri" class="w-full sm:w-auto btn-liquid-glass px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base text-slate-800 flex items-center justify-center gap-2.5">
+                                <i data-lucide="images" class="w-5 h-5 text-amber-600"></i>
+                                <span>Galeri Kegiatan</span>
+                            </a>
+                        </div>
+
+                        <!-- Quick Metrics -->
+                        <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-12 pt-8 border-t border-slate-900/10 max-w-lg mx-auto lg:mx-0">
+                            <div>
+                                <div class="font-display font-bold text-2xl sm:text-3xl text-slate-900">18+</div>
+                                <div class="text-xs text-slate-500 font-medium mt-0.5">Program Kerja</div>
+                            </div>
+                            <div>
+                                <div class="font-display font-bold text-2xl sm:text-3xl text-amber-600">24</div>
+                                <div class="text-xs text-slate-500 font-medium mt-0.5">Ekskul Terhubung</div>
+                            </div>
+                            <div>
+                                <div class="font-display font-bold text-2xl sm:text-3xl text-slate-900">100%</div>
+                                <div class="text-xs text-slate-500 font-medium mt-0.5">Aspirasi Terbuka</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Spotlight Glass Card -->
+                    <div class="lg:col-span-5">
+                        <div class="liquid-card rounded-[2rem] p-5 sm:p-6 relative animate-float">
+                            <!-- Highlight Badge -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-400/30 text-amber-900 border border-amber-500/30">
+                                    Event Unggulan Bulan Ini
+                                </span>
+                                <span class="text-xs text-slate-600 font-medium flex items-center gap-1">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i> Pendaftaran Dibuka
+                                </span>
+                            </div>
+
+                            <!-- Event Banner Image -->
+                            <div class="relative rounded-2xl overflow-hidden aspect-[16/10] mb-5 border border-white/80 shadow-md">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=80" 
+                                    onerror="this.src='https://placehold.co/800x500/FEFCE8/D97706?text=Nusantara+Fest+2026'"
+                                    alt="Nusantara Creative Fest" 
+                                    class="w-full h-full object-cover"
+                                >
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/20 to-transparent"></div>
+                                <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                                    <div>
+                                        <p class="text-xs text-amber-300 font-semibold">12 – 14 Desember 2026</p>
+                                        <h3 class="font-display font-bold text-lg text-white">Nusantara Creative Fest</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                                Pensi tahunan, pameran karya seni digital, bazar kewirausahaan siswa, dan turnamen E-Sports antar kelas dalam satu panggung kolaborasi.
+                            </p>
+
+                            <div class="flex items-center justify-between gap-3">
+                                <div class="flex -space-x-2 text-slate-900">
+                                    <div class="w-8 h-8 rounded-full bg-amber-300 border-2 border-white flex items-center justify-center text-[10px] font-bold shadow-sm">X</div>
+                                    <div class="w-8 h-8 rounded-full bg-yellow-400 border-2 border-white flex items-center justify-center text-[10px] font-bold shadow-sm">XI</div>
+                                    <div class="w-8 h-8 rounded-full bg-amber-500 text-white border-2 border-white flex items-center justify-center text-[10px] font-bold shadow-sm">XII</div>
+                                </div>
+                                <button onclick="openEventDetail(0)" class="btn-liquid-glass px-4 py-2.5 rounded-full text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                                    <span>Detail & Daftar</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-amber-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISI & MISI SECTION -->
+        <section id="visi-misi" class="py-16 sm:py-24 px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Arah Gerak Kabinet</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2">Visi & Misi OSIS Surya</h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-3">
+                        Hadir sebagai jembatan aspirasi yang inklusif, adaptif terhadap teknologi, dan fokus pada pengembangan potensi nyata siswa.
+                    </p>
+                </div>
+
+                <!-- Visi Highlight Card -->
+                <div class="liquid-card rounded-3xl p-6 sm:p-10 mb-8 text-center relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-400/25 border border-amber-500/30 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="compass" class="w-6 h-6 text-amber-600"></i>
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-700">Visi Utama</span>
+                    <blockquote class="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-slate-900 max-w-3xl mx-auto mt-3 leading-snug">
+                        “Mewujudkan OSIS sebagai ruang tumbuh yang inklusif, inovatif, dan transparan untuk membentuk siswa berkarakter serta berdaya saing kreatif.”
+                    </blockquote>
+                </div>
+
+                <!-- 3 Pillars of Misi -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="liquid-card rounded-3xl p-6 sm:p-7">
+                        <div class="w-11 h-11 rounded-2xl bg-amber-400/25 border border-amber-500/30 flex items-center justify-center mb-5">
+                            <i data-lucide="shield-heart" class="w-5 h-5 text-amber-700"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2.5">Ekosistem Safe Space</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Menghadirkan saluran aspirasi terbuka tanpa rasa takut, diskusi kesehatan mental berkala, serta lingkungan sekolah yang suportif bagi seluruh siswa.
+                        </p>
+                    </div>
+
+                    <div class="liquid-card rounded-3xl p-6 sm:p-7">
+                        <div class="w-11 h-11 rounded-2xl bg-yellow-400/30 border border-yellow-500/35 flex items-center justify-center mb-5">
+                            <i data-lucide="cpu" class="w-5 h-5 text-amber-700"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2.5">Digitalisasi & Transparansi</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Memangkas birokrasi informasi acara lewat portal digital terpusat serta mempublikasikan laporan program kerja secara terbuka.
+                        </p>
+                    </div>
+
+                    <div class="liquid-card rounded-3xl p-6 sm:p-7">
+                        <div class="w-11 h-11 rounded-2xl bg-orange-400/20 border border-orange-500/30 flex items-center justify-center mb-5">
+                            <i data-lucide="flame" class="w-5 h-5 text-orange-600"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2.5">Panggung Bakat Lintas Minat</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Memfasilitasi minat akademik maupun non-akademik mulai dari seni, olahraga, literasi digital, hingga proyek kolaborasi lintas ekstrakurikuler.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPCOMING EVENTS / AGENDA SECTION -->
+        <section id="agenda" class="py-16 sm:py-24 px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Kalender Kegiatan</span>
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2">Agenda & Acara Mendatang</h2>
+                    </div>
+
+                    <!-- Liquid Filter Pills -->
+                    <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filter Kategori Acara">
+                        <button onclick="filterEvents('all', this)" class="filter-pill active btn-liquid-glass px-4 py-2 rounded-full text-xs font-bold text-slate-800">
+                            Semua
+                        </button>
+                        <button onclick="filterEvents('kreativitas', this)" class="filter-pill btn-liquid-glass px-4 py-2 rounded-full text-xs font-bold text-slate-700">
+                            Seni & Kreativitas
+                        </button>
+                        <button onclick="filterEvents('olahraga', this)" class="filter-pill btn-liquid-glass px-4 py-2 rounded-full text-xs font-bold text-slate-700">
+                            Olahraga & E-Sports
+                        </button>
+                        <button onclick="filterEvents('edukasi', this)" class="filter-pill btn-liquid-glass px-4 py-2 rounded-full text-xs font-bold text-slate-700">
+                            Workshop & Sosial
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Events Grid -->
+                <div id="events-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Rendered dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITY DOCUMENTATION / GALLERY SECTION -->
+        <section id="galeri" class="py-16 sm:py-24 px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Arsip Visual</span>
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2">Dokumentasi Kegiatan</h2>
+                        <p class="text-slate-600 text-sm sm:text-base mt-2">Klik foto untuk melihat detail momen dan cerita di balik kegiatan.</p>
+                    </div>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-liquid-glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-slate-800 inline-flex items-center gap-2 self-start sm:self-auto">
+                        <i data-lucide="instagram" class="w-4 h-4 text-amber-600"></i>
+                        <span>Arsip Lengkap di Instagram</span>
+                    </a>
+                </div>
+
+                <!-- Bento / Responsive Gallery Grid -->
+                <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Rendered dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE LEADERSHIP / PENGURUS INTI -->
+        <section id="pengurus" class="py-16 sm:py-24 px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Pengurus Inti</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2">BPH Kabinet Surya</h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-2">Penggerak utama koordinasi program kerja dan komunikasi antarsiswa.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <!-- Member 1 -->
+                    <div class="liquid-card rounded-3xl p-5 text-center">
+                        <div class="w-20 h-20 rounded-2xl mx-auto mb-4 p-[2.5px] bg-gradient-to-tr from-amber-500 to-yellow-300 shadow-md shadow-amber-500/15">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" onerror="this.src='https://placehold.co/200x200/FEFCE8/D97706?text=Ketua'" alt="Ketua OSIS" class="w-full h-full object-cover rounded-[13px]">
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-400/25 text-amber-900 border border-amber-500/30 mb-2">Ketua OSIS</span>
+                        <h3 class="font-display font-bold text-base text-slate-900">Nadia Maharani</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">XI MIPA 2</p>
+                    </div>
+
+                    <!-- Member 2 -->
+                    <div class="liquid-card rounded-3xl p-5 text-center">
+                        <div class="w-20 h-20 rounded-2xl mx-auto mb-4 p-[2.5px] bg-gradient-to-tr from-yellow-500 to-amber-300 shadow-md shadow-amber-500/15">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" onerror="this.src='https://placehold.co/200x200/FEFCE8/D97706?text=Wakil'" alt="Wakil Ketua OSIS" class="w-full h-full object-cover rounded-[13px]">
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-yellow-400/30 text-amber-900 border border-yellow-500/35 mb-2">Wakil Ketua</span>
+                        <h3 class="font-display font-bold text-base text-slate-900">Raka Pratama</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">XI IPS 1</p>
+                    </div>
+
+                    <!-- Member 3 -->
+                    <div class="liquid-card rounded-3xl p-5 text-center">
+                        <div class="w-20 h-20 rounded-2xl mx-auto mb-4 p-[2.5px] bg-gradient-to-tr from-amber-400 to-orange-400 shadow-md shadow-amber-500/15">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" onerror="this.src='https://placehold.co/200x200/FEFCE8/D97706?text=Sekretaris'" alt="Sekretaris Umum" class="w-full h-full object-cover rounded-[13px]">
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-400/20 text-orange-900 border border-orange-500/30 mb-2">Sekretaris Umum</span>
+                        <h3 class="font-display font-bold text-base text-slate-900">Alya Khairunnisa</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">XI MIPA 4</p>
+                    </div>
+
+                    <!-- Member 4 -->
+                    <div class="liquid-card rounded-3xl p-5 text-center">
+                        <div class="w-20 h-20 rounded-2xl mx-auto mb-4 p-[2.5px] bg-gradient-to-tr from-yellow-400 to-amber-500 shadow-md shadow-amber-500/15">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" onerror="this.src='https://placehold.co/200x200/FEFCE8/D97706?text=Bendahara'" alt="Bendahara Umum" class="w-full h-full object-cover rounded-[13px]">
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-300/35 text-amber-950 border border-amber-500/30 mb-2">Bendahara Umum</span>
+                        <h3 class="font-display font-bold text-base text-slate-900">Dimas Saputra</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">XI IPS 3</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASPIRATION CALLOUT BANNER -->
+        <section class="py-12 sm:py-20 px-4 sm:px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="liquid-card rounded-[2.25rem] p-8 sm:p-12 text-center relative overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-amber-300/35 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-yellow-300/35 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="relative z-10 max-w-2xl mx-auto">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-400/25 border border-amber-500/35 flex items-center justify-center mx-auto mb-5">
+                            <i data-lucide="megaphone" class="w-6 h-6 text-amber-700"></i>
+                        </div>
+                        <h2 class="font-display font-bold text-2xl sm:text-4xl text-slate-900 mb-4">
+                            Punya Ide Acara atau Masukan Buat Sekolah?
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-8">
+                            Suaramu menentukan arah kegiatan kita berikutnya. Kirimkan kritik, saran fasilitas sekolah, atau usulan lomba secara anonim maupun bernama.
+                        </p>
+                        <button onclick="openAspirationModal()" class="btn-liquid-primary px-8 py-4 rounded-full font-bold text-sm sm:text-base text-slate-900 inline-flex items-center gap-2.5">
+                            <i data-lucide="send" class="w-4 h-4 text-slate-900"></i>
+                            <span>Tulis Aspirasi Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-slate-900/10 bg-white/80 backdrop-blur-xl py-10 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center shadow-sm">
+                    <i data-lucide="sun" class="w-4 h-4 text-slate-900"></i>
+                </div>
+                <div>
+                    <p class="font-display font-bold text-sm text-slate-900">OSIS SMA Nusantara — Kabinet Surya</p>
+                    <p class="text-xs text-slate-500">Jl. Pendidikan No. 45 • Sekretariat OSIS Lt. 2</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="btn-liquid-glass p-2.5 rounded-full text-slate-700 hover:text-slate-950">
+                    <i data-lucide="instagram" class="w-4 h-4"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="btn-liquid-glass p-2.5 rounded-full text-slate-700 hover:text-slate-950">
+                    <i data-lucide="youtube" class="w-4 h-4"></i>
+                </a>
+                <button onclick="copyContactEmail()" class="btn-liquid-glass px-4 py-2 rounded-full text-xs font-semibold text-slate-800 flex items-center gap-2">
+                    <i data-lucide="mail" class="w-3.5 h-3.5 text-amber-600"></i>
+                    <span>osis@smanusantara.sch.id</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: EVENT DETAIL MODAL -->
+    <div id="event-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/45 backdrop-blur-md">
+        <div class="liquid-card bg-white/90 rounded-[2rem] max-w-lg w-full p-6 sm:p-7 relative animate-[fadeIn_0.25s_ease-out]">
+            <button onclick="closeEventModal()" aria-label="Tutup" class="btn-liquid-glass p-2 rounded-full text-slate-600 hover:text-slate-950 absolute top-5 right-5">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <div id="event-modal-content">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: GALLERY LIGHTBOX MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/65 backdrop-blur-lg">
+        <div class="liquid-card bg-white/95 rounded-[2rem] max-w-3xl w-full overflow-hidden relative">
+            <button onclick="closeLightbox()" aria-label="Tutup Galeri" class="btn-liquid-glass p-2.5 rounded-full text-slate-900 absolute top-4 right-4 z-10">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <div class="aspect-[16/10] w-full bg-slate-100 overflow-hidden">
+                <img id="lightbox-img" src="" alt="Dokumentasi Kegiatan" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                    <span id="lightbox-date" class="text-xs font-bold text-amber-600"></span>
+                    <span id="lightbox-tag" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-400/20 text-amber-900 border border-amber-500/25"></span>
+                </div>
+                <h3 id="lightbox-title" class="font-display font-bold text-xl text-slate-900 mb-2"></h3>
+                <p id="lightbox-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ANONYMOUS ASPIRATION FORM MODAL -->
+    <div id="aspiration-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/45 backdrop-blur-md">
+        <div class="liquid-card bg-white/92 rounded-[2rem] max-w-lg w-full p-6 sm:p-8 relative">
+            <button onclick="closeAspirationModal()" aria-label="Tutup Form" class="btn-liquid-glass p-2 rounded-full text-slate-600 hover:text-slate-950 absolute top-5 right-5">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 rounded-2xl bg-amber-400/30 border border-amber-500/35 flex items-center justify-center">
+                    <i data-lucide="message-square-heart" class="w-5 h-5 text-amber-700"></i>
+                </div>
+                <div>
+                    <h3 class="font-display font-bold text-xl text-slate-900">Kotak Aspirasi Siswa</h3>
+                    <p class="text-xs text-slate-500">Identitasmu aman & bisa dikirim secara anonim.</p>
+                </div>
+            </div>
+
+            <form id="aspiration-form" onsubmit="handleAspirationSubmit(event)" class="space-y-4">
+                <div>
+                    <label for="asp-sender" class="block text-xs font-semibold text-slate-700 mb-1.5">Nama / Kelas (Opsional)</label>
+                    <input type="text" id="asp-sender" placeholder="Kosongkan jika ingin anonim" class="w-full px-4 py-3 rounded-2xl bg-white/80 border border-slate-900/15 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white transition-all">
+                </div>
+
+                <div>
+                    <label for="asp-category" class="block text-xs font-semibold text-slate-700 mb-1.5">Kategori Aspirasi</label>
+                    <select id="asp-category" class="w-full px-4 py-3 rounded-2xl bg-white/90 border border-slate-900/15 text-sm text-slate-900 focus:outline-none focus:border-amber-500 transition-all">
+                        <option value="Ide Acara & Lomba">Ide Acara & Lomba</option>
+                        <option value="Fasilitas & Lingkungan Sekolah">Fasilitas & Lingkungan Sekolah</option>
+                        <option value="Evaluasi Program OSIS">Evaluasi Program OSIS</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="asp-message" class="block text-xs font-semibold text-slate-700 mb-1.5">Pesan atau Usulanmu <span class="text-amber-600">*</span></label>
+                    <textarea id="asp-message" rows="4" required placeholder="Tulis aspirasi atau ide kegiatanmu dengan jelas dan sopan..." class="w-full px-4 py-3 rounded-2xl bg-white/80 border border-slate-900/15 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white transition-all resize-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeAspirationModal()" class="btn-liquid-glass px-5 py-3 rounded-full text-xs sm:text-sm font-semibold text-slate-700">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn-liquid-primary px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span>Kirim Aspirasi</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION (Replaces alert()) -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 liquid-card bg-white/95 px-5 py-3.5 rounded-2xl border-amber-400/50 shadow-xl">
+        <div class="w-8 h-8 rounded-full bg-amber-400/30 flex items-center justify-center shrink-0">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-700"></i>
+        </div>
+        <p id="toast-message" class="text-xs sm:text-sm font-semibold text-slate-900"></p>
+    </div>
+
+    <script>
+        // Data Agenda & Acara
+        const eventsData = [
+            {
+                id: 0,
+                title: "Nusantara Creative Fest 2026",
+                category: "kreativitas",
+                categoryLabel: "Seni & Kreativitas",
+                date: "12 – 14 Desember 2026",
+                location: "Lapangan Utama & Aula Sekolah",
+                status: "Pendaftaran Dibuka",
+                description: "Festival kreativitas akhir semester yang menampilkan panggung musik siswa, pameran seni visual, bazar kuliner kelas, dan penampilan ekstrakurikuler.",
+                requirements: "Terbuka untuk seluruh perwakilan kelas X, XI, dan XII. Pendaftaran stand bazar dan band maksimal 5 Desember 2026."
+            },
+            {
+                id: 1,
+                title: "Classmeeting: Nexus Cup",
+                category: "olahraga",
+                categoryLabel: "Olahraga & E-Sports",
+                date: "16 – 19 Desember 2026",
+                location: "GOR Sekolah & Lab Multimedia",
+                status: "Segera Hadir",
+                description: "Kompetisi antar kelas pasca-ujian yang mempertandingkan Futsal, Basket 3x3, serta turnamen E-Sports (Mobile Legends & Valorant) dengan sistem gugur.",
+                requirements: "Setiap kelas wajib mengirimkan minimal 1 tim per cabang lomba dan didampingi koordinator kelas."
+            },
+            {
+                id: 2,
+                title: "Workshop Digital Branding & AI",
+                category: "edukasi",
+                categoryLabel: "Workshop & Sosial",
+                date: "18 Januari 2027",
+                location: "Aula Serbaguna Lt. 2",
+                status: "Kuota Terbatas",
+                description: "Pelatihan praktis desain grafis modern, personal branding di media sosial, serta pemanfaatan AI secara etis untuk tugas sekolah dan portofolio kuliah.",
+                requirements: "Gratis untuk 100 pendaftar pertama. Peserta disarankan membawa laptop atau tablet pribadi."
+            },
+            {
+                id: 3,
+                title: "Aksi Hijau: Nusantara Zero Waste",
+                category: "edukasi",
+                categoryLabel: "Workshop & Sosial",
+                date: "2 Februari 2027",
+                location: "Lingkungan Sekolah & Taman Kota",
+                status: "Open Volunteer",
+                description: "Gerakan bersih lingkungan, pemilahan sampah anorganik kelas, serta penanaman 100 bibit pohon bersama ekstrakurikuler Pecinta Alam dan PMR.",
+                requirements: "Terbuka bagi seluruh siswa yang ingin mendaftar sebagai relawan lingkungan."
+            },
+            {
+                id: 4,
+                title: "Lomba Fotografi & Reels Sekolah",
+                category: "kreativitas",
+                categoryLabel: "Seni & Kreativitas",
+                date: "10 – 20 Februari 2027",
+                location: "Pengumpulan Online",
+                status: "Pendaftaran Dibuka",
+                description: "Abadikan momen kebersamaan dan sudut estetik sekolah dalam bentuk esai foto atau video pendek berdurasi maksimal 60 detik.",
+                requirements: "Karya orisinal, tidak mengandung unsur SARA, dan diunggah dengan tagar resmi OSIS Aksara."
+            },
+            {
+                id: 5,
+                title: "Sparring Persahabatan Antar SMA",
+                category: "olahraga",
+                categoryLabel: "Olahraga & E-Sports",
+                date: "27 Februari 2027",
+                location: "Lapangan Basket & Futsal",
+                status: "Terjadwal",
+                description: "Laga persahabatan tim inti ekskul olahraga SMA Nusantara melawan delegasi OSIS sekolah mitra se-kota untuk mempererat sportivitas.",
+                requirements: "Suporter siswa wajib mengenakan atribut sekolah dan menjaga ketertiban area pertandingan."
+            }
+        ];
+
+        // Data Dokumentasi / Galeri
+        const galleryData = [
+            {
+                title: "Latihan Dasar Kepemimpinan Siswa (LDKS)",
+                date: "Oktober 2026",
+                tag: "Kepemimpinan",
+                image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=900&q=80",
+                desc: "Pembekalan manajemen organisasi, problem solving, dan simulasi kerja sama tim bagi 45 pengurus OSIS & MPK terpilih periode 2026/2027."
+            },
+            {
+                title: "Peringatan Hari Sumpah Pemuda",
+                date: "28 Oktober 2026",
+                tag: "Nasionalisme",
+                image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80",
+                desc: "Upacara bendera bertema pakaian adat nusantara yang dilanjutkan dengan parade puisi kebangsaan dan orasi pemuda dari perwakilan tiap angkatan."
+            },
+            {
+                title: "Bakti Sosial & Berbagi Buku Bacaan",
+                date: "14 November 2026",
+                tag: "Sosial",
+                image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=80",
+                desc: "Penyaluran lebih dari 350 buku bacaan layak pakai dan paket alat tulis hasil donasi warga sekolah ke taman baca masyarakat sekitar."
+            },
+            {
+                title: "Forum Aspirasi Siswa Terbuka (FAST)",
+                date: "22 November 2026",
+                tag: "Aspirasi",
+                image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=900&q=80",
+                desc: "Dialog santai antara perwakilan kelas, pengurus OSIS, dan pihak kesiswaan membahas peningkatan fasilitas kantin, Wi-Fi, dan jadwal kegiatan."
+            },
+            {
+                title: "Pameran Karya Seni & Desain Digital",
+                date: "30 November 2026",
+                tag: "Kreativitas",
+                image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=80",
+                desc: "Eksibisi ilustrasi digital, poster kampanye anti-bullying, dan instalasi daur ulang karya siswa kelas X dan XI di selasar aula."
+            },
+            {
+                title: "Turnamen Persahabatan Basket Pelajar",
+                date: "04 Desember 2026",
+                tag: "Olahraga",
+                image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=900&q=80",
+                desc: "Antusiasme suporter memenuhi tribun GOR saat tim basket sekolah berhasil meraih juara pertama pada laga persahabatan antarpelajar."
+            }
+        ];
+
+        // Render Events
+        function renderEvents(filter = 'all') {
+            const grid = document.getElementById('events-grid');
+            const filtered = filter === 'all' 
+                ? eventsData 
+                : eventsData.filter(item => item.category === filter);
+
+            grid.innerHTML = filtered.map(ev => `
+                <article class="liquid-card rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-400/25 text-amber-900 border border-amber-500/25">
+                                ${ev.categoryLabel}
+                            </span>
+                            <span class="text-[11px] font-semibold text-slate-500">${ev.status}</span>
+                        </div>
+
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2 leading-snug">${ev.title}</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5 line-clamp-3">
+                            ${ev.description}
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-900/10">
+                        <div class="space-y-1.5 mb-4 text-xs text-slate-600 font-medium">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-600 shrink-0"></i>
+                                <span>${ev.date}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-orange-500 shrink-0"></i>
+                                <span class="truncate">${ev.location}</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openEventDetail(${ev.id})" class="w-full btn-liquid-glass py-2.5 px-4 rounded-full text-xs font-bold text-slate-800 flex items-center justify-center gap-2">
+                            <span>Info Lengkap</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-amber-600"></i>
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        // Filter Events Handler
+        function filterEvents(category, btnElement) {
+            document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            renderEvents(category);
+        }
+
+        // Render Gallery
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = galleryData.map((item, idx) => `
+                <div onclick="openLightbox(${idx})" class="liquid-card rounded-3xl overflow-hidden cursor-pointer group">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                        <img 
+                            src="${item.image}" 
+                            onerror="this.src='https://placehold.co/600x450/FEFCE8/D97706?text=Dokumentasi+OSIS'"
+                            alt="${item.title}" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/25 to-transparent"></div>
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-[11px] font-bold bg-white/85 backdrop-blur-md text-slate-900 border border-white">
+                            ${item.tag}
+                        </span>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <p class="text-[11px] text-amber-300 font-semibold mb-1">${item.date}</p>
+                            <h3 class="font-display font-bold text-base text-white leading-snug group-hover:text-amber-200 transition-colors">
+                                ${item.title}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Event Detail Modal
+        function openEventDetail(id) {
+            const ev = eventsData.find(item => item.id === id);
+            if (!ev) return;
+
+            const container = document.getElementById('event-modal-content');
+            container.innerHTML = `
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-400/25 text-amber-900 border border-amber-500/30 mb-3">
+                    ${ev.categoryLabel} • ${ev.status}
+                </span>
+                <h3 class="font-display font-bold text-2xl text-slate-900 mb-3 pr-8">${ev.title}</h3>
+                <div class="space-y-2 text-xs sm:text-sm text-slate-700 bg-amber-50/80 border border-amber-500/15 rounded-2xl p-4 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="calendar" class="w-4 h-4 text-amber-600"></i>
+                        <span><strong>Waktu:</strong> ${ev.date}</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-orange-500"></i>
+                        <span><strong>Lokasi:</strong> ${ev.location}</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">${ev.description}</p>
+                <div class="p-3.5 rounded-2xl bg-amber-400/15 border border-amber-500/25 text-xs text-slate-800 leading-relaxed mb-6">
+                    <strong>Ketentuan Peserta:</strong> ${ev.requirements}
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="registerEventSuccess('${ev.title}')" class="flex-1 btn-liquid-primary py-3 px-5 rounded-full text-xs sm:text-sm font-bold text-slate-900 flex items-center justify-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        <span>Daftar via Portal Siswa</span>
+                    </button>
+                    <button onclick="closeEventModal()" class="btn-liquid-glass py-3 px-5 rounded-full text-xs sm:text-sm font-semibold text-slate-700">
+                        Tutup
+                    </button>
+                </div>
+            `;
+
+            const modal = document.getElementById('event-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeEventModal() {
+            const modal = document.getElementById('event-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function registerEventSuccess(title) {
+            closeEventModal();
+            showToast(`Formulir pendaftaran "${title}" siap! Mengarahkan ke portal registrasi...`);
+        }
+
+        // Gallery Lightbox
+        function openLightbox(index) {
+            const item = galleryData[index];
+            if (!item) return;
+
+            document.getElementById('lightbox-img').src = item.image;
+            document.getElementById('lightbox-date').textContent = item.date;
+            document.getElementById('lightbox-tag').textContent = item.tag;
+            document.getElementById('lightbox-title').textContent = item.title;
+            document.getElementById('lightbox-desc').textContent = item.desc;
+
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Aspiration Modal
+        function openAspirationModal() {
+            const modal = document.getElementById('aspiration-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAspirationModal() {
+            const modal = document.getElementById('aspiration-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleAspirationSubmit(e) {
+            e.preventDefault();
+            const category = document.getElementById('asp-category').value;
+            document.getElementById('aspiration-form').reset();
+            closeAspirationModal();
+            showToast(`Aspirasi kategori "${category}" berhasil dikirim ke pengurus OSIS!`);
+        }
+
+        // Mobile Navigation Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Copy Email Helper (Using execCommand for iFrame compatibility)
+        function copyContactEmail() {
+            const tempInput = document.createElement('input');
+            tempInput.value = 'osis@smanusantara.sch.id';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast('Alamat email OSIS berhasil disalin!');
+            } catch (err) {
+                showToast('Email: osis@smanusantara.sch.id');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // Toast Notification
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.textContent = message;
+
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            lucide.createIcons();
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4000);
+        }
+
+        // Close modals on backdrop click or Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeEventModal();
+                closeLightbox();
+                closeAspirationModal();
+            }
+        });
+
+        ['event-modal', 'lightbox-modal', 'aspiration-modal'].forEach(id => {
+            document.getElementById(id).addEventListener('click', (e) => {
+                if (e.target.id === id) {
+                    e.target.classList.add('hidden');
+                    e.target.classList.remove('flex');
+                }
+            });
+        });
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEvents('all');
+            renderGallery();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
+```
